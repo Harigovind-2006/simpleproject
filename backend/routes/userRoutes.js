@@ -1,12 +1,22 @@
-import express from "express";
-import {
-  registerUser,
-  loginUser,
-} from "../controllers/userController.js";
-
+const express = require("express");
+const { userSignup,userLogin } = require("../controllers/userController");
+const {authMiddleware} = require("../middlewares/userMiddleWare")
 const router = express.Router();
 
-router.post("/register", registerUser);
-router.post("/login", loginUser);
+// userRoutes.js
+router.get("/signup", (req, res) => {
+    res.render("signup");
+});
+router.get("/login", (req, res) => {
+    res.render("login");
+});
+router.get("/profile", authMiddleware, (req, res) => {
+    res.json(req.user);
+});
 
-export default router;
+
+router.post("/signup", userSignup);
+router.post("/login", userLogin);
+
+
+module.exports = router;

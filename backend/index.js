@@ -1,19 +1,24 @@
-import express from "express";
-import dotenv from "dotenv";
-import mongoose from "mongoose";
-import userRoutes from "./routes/userRoutes.js";
-import cors from "cors";
-dotenv.config();
+const express = require("express");
+const router = require("./routes/userRoutes");
+const connectDB = require("./config/db")
+
+
 const app = express();
+connectDB()
+app.set("view engine", "ejs");
+
+app.get("/", (req, res) => {
+  res.send("Heyy how are you");
+});
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors())
-app.use("/api/users", userRoutes);
 
-mongoose
-  .connect(process.env.MONGO_DB_URL)
-  .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.log(err));
 
-app.listen(5000, () => {
-  console.log("Server Running on Port 5000");
+
+// index.js
+app.use("/", router);
+
+
+app.listen(3000, () => {
+  console.log("Server running on port 3000");
 });
