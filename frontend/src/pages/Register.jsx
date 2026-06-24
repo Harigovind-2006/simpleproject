@@ -27,7 +27,7 @@ function Register() {
         formData
       );
 
-      alert("Registration Successful");
+      
       navigate("/");
     } catch (error) {
       alert("Registration Failed");
