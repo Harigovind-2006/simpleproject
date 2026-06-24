@@ -73,7 +73,7 @@ function Login() {
         <p className="text-center mt-4">
           Don't have an account?{" "}
           <Link
-            to="/register"
+            to="/signup"
             className="text-blue-600 font-semibold"
           >
             Sign Up
