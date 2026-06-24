@@ -67,12 +67,14 @@ async function userLogin(req, res) {
         }
     );
 
-    res.render("home", {
+return res.status(200).json({
+    token,
+    user: {
         userId: user.userId,
         name: user.name,
-        token
-    });
-
+        email: user.email
+    }
+});
     
 
 }
