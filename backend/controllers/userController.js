@@ -20,9 +20,17 @@ async function userSignup(req, res) {
         password: hashedPassword
     });
 
-    res.render("home", {
-    userId,
-    name
+    res.status(201).json({
+  message: "Signup successful",
+  userId,
+  name
+});
+res.json({
+  token,
+  user: {
+    userId: user.userId,
+    name: user.name
+  }
 });
 }
 
