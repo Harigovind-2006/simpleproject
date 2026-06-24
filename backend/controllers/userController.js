@@ -4,34 +4,40 @@ const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv")
 dotenv.config();
 async function userSignup(req, res) {
-    const { name, email, password } = req.body;
+    try {
+        const { name, email, password } = req.body;
 
-    const userId = Math.floor(1000 + Math.random() * 9000);
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const existingUser = await User.findOne({ email });
+        const existingUser = await User.findOne({ email });
 
-    if (existingUser) {
-        return res.send("User already exists!");
+        if (existingUser) {
+            return res.status(400).json({
+                message: "User already exists"
+            });
+        }
+
+        const userId = Math.floor(1000 + Math.random() * 9000);
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        await User.create({
+            userId,
+            name,
+            email,
+            password: hashedPassword
+        });
+
+        return res.status(201).json({
+            message: "Signup successful",
+            userId,
+            name
+        });
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "Server Error"
+        });
     }
-    await User.create({
-        userId,
-        name,
-        email,
-        password: hashedPassword
-    });
-
-    res.status(201).json({
-  message: "Signup successful",
-  userId,
-  name
-});
-res.json({
-  token,
-  user: {
-    userId: user.userId,
-    name: user.name
-  }
-});
 }
 
 async function userLogin(req, res) {
@@ -40,7 +46,9 @@ async function userLogin(req, res) {
     const user = await User.findOne({ userId });
 
     if (!user) {
-        return res.send("Invalid User!");
+        return res.status(400).json({
+            message: "Invalid User!"
+        });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
