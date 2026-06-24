@@ -1,5 +1,5 @@
 function UrlCard({ item }) {
-  const shortUrl = `http://localhost:3000/${item.shortId}`;
+  const shortUrl = `https://urlshortner-srak.onrender.com/${item.shortId}`;
 
   const copyUrl = () => {
     navigator.clipboard.writeText(shortUrl);

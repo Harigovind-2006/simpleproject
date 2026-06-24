@@ -23,12 +23,12 @@ function Register() {
 
     try {
       await axios.post(
-        "http://localhost:3000/signup",
+        "https://urlshortner-srak.onrender.com/signup",
         formData
       );
 
       alert("Registration Successful");
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       alert("Registration Failed");
       console.log(error);

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://urlshortner-srak.onrender.com",
 });
 
 export const shortenUrl = (data) => API.post("/shorten", data);

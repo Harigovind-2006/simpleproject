@@ -22,7 +22,7 @@ function Login() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/login",
+        "https://urlshortner-srak.onrender.com/login",
         formData
       );
 

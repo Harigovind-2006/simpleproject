@@ -30,7 +30,7 @@ function UrlTable({ urls }) {
 
               <td className="p-3">
                 <a
-                  href={`http://localhost:3000/${url.shortId}`}
+                  href={`https://urlshortner-srak.onrender.com${url.shortId}`}
                   target="_blank"
                   rel="noreferrer"
                   className="text-blue-600"
